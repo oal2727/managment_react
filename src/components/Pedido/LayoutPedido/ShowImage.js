@@ -5,41 +5,53 @@ import { MaterialIcons } from '@expo/vector-icons';
 import * as ImagePicker from 'expo-image-picker';
 import * as Permissions from 'expo-permissions';
 const ShowImagen = (props) => {
-  const prop = props.prop
   //conincide solo permisos para nandroid
   // const [image,setImage] = useState(null)
-    useEffect(() => {
-        const { status } = Permissions.askAsync(Permissions.CAMERA_ROLL);       
-        if (status !== 'granted') {
-          console.log("problem for show images")
-        }
-     }, [])
-    const pickImage = async () => {
-        let result = await ImagePicker.launchImageLibraryAsync({
-          mediaTypes: ImagePicker.MediaTypeOptions.All,
-          allowsEditing: true,
-          aspect: [4, 3],
-          quality: 1,
+  // useEffect(() => {
+  //   console.log(props.image)
+  // }, [])
+
+    const SelectImage = async() =>{
+      const resultPermision = await Permissions.askAsync(Permissions.CAMERA_ROLL);
+      const permisionresponse = resultPermision.permissions.cameraRoll.status;
+      if(permisionresponse === "denied"){
+        console.log("necesario aceptar permisos")
+      }else{
+        const response = await ImagePicker.launchImageLibraryAsync({
+          allowsEditing:true,
+          aspect:[4,3],
         });
-        if (!result.cancelled) {
-          // setImage(result.uri)
-          props.setImage(result.uri);
-          console.log(result.uri)
-       }};
+
+        if(response.cancelled){
+          console.log("ha cerrado la galeria");
+        }else{
+          console.log("imagen subida correctamente");
+          props.setImage(response.uri);
+        }
+
+      }
+    }
     return (
         <View style={{flexDirection:'row'}}>
-          <TouchableOpacity style={{width:100,height:50,marginLeft:10,marginTop:25,}}  onPress={pickImage}>
+          <TouchableOpacity style={{width:100,height:50,marginLeft:10,marginTop:20}}  onPress={SelectImage}>
           <MaterialIcons name="insert-photo" size={50}  style={{alignSelf:'center',color:'green',width:50,height:50}} />
           <Text style={{textAlign:'center',color:'green'}}>Buscar Imagen</Text>
           </TouchableOpacity>
            {
              props.image === null ?
-             <Text style={{marginLeft:40,marginTop:60,fontSize:19,fontFamily:'Roboto-Light',color:'red'}}>Seleccione una Imagen</Text>
+             <Text style={{marginLeft:10,marginTop:30,fontSize:19,fontFamily:'Roboto-Light',color:'red'}}>Seleccione una Imagen</Text>
             :
-           <Image
-            style={{marginLeft:40,borderColor:'#585858',borderWidth:2,width:150,height:150}}
-            source={{ uri: props.image }}
-            />}
+           <View>
+             {
+               <Image
+               value={props.image}
+               style={{marginLeft:50,borderColor:'#585858',borderWidth:2,width:110,height:110}}
+               source={{ uri: props.image }}
+               />
+               
+            }
+             </View>
+            }
         </View>
       );
 }

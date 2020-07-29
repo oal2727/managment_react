@@ -94,6 +94,7 @@ const ListClientes = (props) => {
                       <Text>{index+1}</Text>
                     </Badge>
                     {/* navigation container */}
+           
                     <Button warning onPress={() => GeneratePedido(item)}>
                            <Text style={{fontFamily:'Roboto-Light'}}>Generar pedido</Text>
                            <MaterialIcons style={{marginRight:10}} name="send" size={24} color="white" />
@@ -135,6 +136,8 @@ const ListClientes = (props) => {
                       <MaterialIcons  style={{textAlign:'center'}} name="delete" size={35} color="white" />
                       <Text  style={{fontFamily:'Roboto-Light',color:'white'}}>Eliminar</Text>
                       </Button>
+
+                
 
                       </Container>
                     </CardItem>

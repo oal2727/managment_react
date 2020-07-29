@@ -27,11 +27,19 @@ const SecondManagment = (props) =>{
                   bordered 
                   onChangeText={prop.handleChange('nota')}
                   value={prop.values.nota}
-                   placeholder="Ingrese critica del articulo" />
+                   placeholder="Ingrese comentario del articulo" />
               </Item>
-              <Button type="submit" primary style={{alignSelf:'center',width:200,marginTop:20}} onPress={prop.handleSubmit}>
-                  <Text style={{flex:1,textAlign:'center'}}>Agregar</Text>
+              {
+                prop.values.id === null ? 
+                <Button type="submit" primary style={{alignSelf:'center',width:200,marginTop:20}} onPress={prop.handleSubmit}>
+                <Text style={{flex:1,textAlign:'center'}}>Agregar Pedido</Text>
+            </Button>
+            :
+            <Button type="submit" success style={{alignSelf:'center',width:200,marginTop:20}} onPress={prop.handleSubmit}>
+                  <Text style={{flex:1,textAlign:'center'}}>Actualizar Pedido</Text>
               </Button>
+
+              }
       </View>
     )
 }

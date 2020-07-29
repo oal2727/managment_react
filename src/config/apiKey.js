@@ -1,5 +1,6 @@
 //uso de proyecto en firebase "managment"
-import firebase from 'firebase/app'
+//cambie firebase  firebase/app por
+import firebase from 'firebase'
 import 'firebase/firestore'
 var firebaseConfig = {
     apiKey: "AIzaSyCiPEiAFF3e9pImoYPW9qjTqGtrg7qpZR4",
@@ -13,4 +14,7 @@ var firebaseConfig = {
   };
   // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
+//añadir timestamp
+firebase.database.ServerValue.TIMESTAMP
+
 export {firebase}

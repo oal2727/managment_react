@@ -1,88 +1,70 @@
-export const CalculoPedido = (values) =>{
-    console.log(values)
-    const talla = values.talla
-    const unidades = values.unidad
-    //aislar por precio unidad
-    if(talla == "2" || talla == "4" || talla == "6"){
-        const preciounidad=70
-        const preciorebaja1=55
-        const preciorebaja2=52
-        const preciorebaja3=50
-        const preciorebaja4=45
-        CostoPedido(unidades,preciounidad,preciorebaja1,preciorebaja2,preciorebaja3,preciorebaja4)
+class Pedido{
+    constructor(){}
 
-    }else if( talla == "8"){
-        const preciounidad=75
-        const preciorebaja1=55
-        const preciorebaja2=52
-        const preciorebaja3=50
-        const preciorebaja4=45
-        CostoPedido(unidades,preciounidad,preciorebaja1,preciorebaja2,preciorebaja3,preciorebaja4)
-    }else if(talla == "10"){
-        const preciounidad=75
-        const preciorebaja1=55
-        const preciorebaja2=52
-        const preciorebaja3=50
-        const preciorebaja4=50
-        CostoPedido(unidades,preciounidad,preciorebaja1,preciorebaja2,preciorebaja3,preciorebaja4)
-    }else if(talla == "12"){
-        const preciounidad=75
-        const preciorebaja1=60
-        const preciorebaja2=57
-        const preciorebaja3=55
-        const preciorebaja4=50
-        CostoPedido(unidades,preciounidad,preciorebaja1,preciorebaja2,preciorebaja3,preciorebaja4)
-    }else if(talla == "14" || talla == "16"){
-        console.log("talla 14")
-        const preciounidad=80
-        const preciorebaja1=60
-        const preciorebaja2=57
-        const preciorebaja3=55
-        const preciorebaja4=50
-        CostoPedido(unidades,preciounidad,preciorebaja1,preciorebaja2,preciorebaja3,preciorebaja4)
-    }else if(talla == "S" || talla == "M" || talla =="L"){
-        const preciounidad=90
-        const preciorebaja1=76
-        const preciorebaja2=74
-        const preciorebaja3=72
-        const preciorebaja4=70
-        CostoPedido(unidades,preciounidad,preciorebaja1,preciorebaja2,preciorebaja3,preciorebaja4)
-    }else{
-        const preciounidad=95
-        const preciorebaja1=81
-        const preciorebaja2=79
-        const preciorebaja3=77
-        const preciorebaja4=75
-        CostoPedido(unidades,preciounidad,preciorebaja1,preciorebaja2,preciorebaja3,preciorebaja4)
+    getPedidos(){
+        const tallas=[
+            {id:'1',nombre:'Seleccione'},
+            {id:'2',nombre:'Talla 2'},
+            {id:'3',nombre:'Talla 4'},
+            {id:'4',nombre:'Talla 6'},
+            {id:'5',nombre:'Talla 8'},
+            {id:'6',nombre:'Talla 10'},
+            {id:'7',nombre:'Talla 12'},
+            {id:'8',nombre:'Talla 14'},
+            {id:'9',nombre:'Talla 16'},
+            {id:'10',nombre:'Talla S'},
+            {id:'11',nombre:'Talla M'},
+            {id:'12',nombre:'Talla L'},
+            {id:'13',nombre:'Talla XL'},
+        ]
+        return tallas
     }
-}
-const CostoPedido = (unidades,preciounidad,preciorebaja1,preciorebaja2,preciorebaja3,preciorebaja4) => {
-    if(unidades <= 2){
-        return preciounidad * unidades
-    }else if(unidades == 3){
-        return  preciorebaja1 * 3
+    getMarcas(){
+        const marcas=[
+            {id:1,nombre:'Nike',imagen:require('../../../../assets/imagenes/Logos/LogoNike.jpg')},
+            {id:2,nombre:'Adidas',imagen:require('../../../../assets/imagenes/Logos/LogoAdidas.jpeg')},
+            {id:3,nombre:'Rebook',imagen:require('../../../../assets/imagenes/Logos/LogoReebok.jpg')},
+            {id:4,nombre:'Fila',imagen:require('../../../../assets/imagenes/Logos/LogoFila.png')},
+            {id:5,nombre:'Puma',imagen:require('../../../../assets/imagenes/Logos/LogoPuma.jpeg')},
+            {id:6,nombre:'Jordan',imagen:require('../../../../assets/imagenes/Logos/LogoJordan.jpeg')}
+          ]
+          return marcas
     }
-    // 4 unidades listo
-    else if(unidades <= 4){
-        return  preciorebaja2 * 4
-    }else if(4 <= unidades && unidades <= 5){
-        return preciorebaja2 * unidades
+    getSexo(){
+        const sexos=[
+            {id:'1',nombre:'Seleccione'},
+            {id:'2',nombre:'Hombre'},
+            {id:'3',nombre:'Mujer'}
+          ]
+          return sexos
     }
-    // 6 unidades listo 
-    else if(unidades == 6){
-        return  preciorebaja3 * 6
-     
-    }else if(6 <= unidades && unidades <= 11){
-        console.log("unidades 7 heres")
-        console.log(preciorebaja3 * unidades)
-        return  preciorebaja3 * unidades            
+    getColores(){
+        const colores = [
+                {id:1,nombre:'Sky',imagen:require('../../../../assets/imagenes/Colores/PARTE1/Sky.jpg')},
+                {id:2,nombre:'Azulino',imagen:require('../../../../assets/imagenes/Colores/PARTE1/Azulino.jpg')},
+                {id:3,nombre:'Acero',imagen:require('../../../../assets/imagenes/Colores/PARTE1/Acero.jpg')},
+                //parte 2
+                {id:4,nombre:'Blanco',imagen:require('../../../../assets/imagenes/Colores/PARTE2/Blanco.jpg')},
+                {id:5,nombre:'Melangue 3%',imagen:require('../../../../assets/imagenes/Colores/PARTE2/Melangue3.jpg')},
+                {id:6,nombre:'Melangue 10%',imagen:require('../../../../assets/imagenes/Colores/PARTE2/Melangue10.jpg')},
+                {id:7,nombre:'Negro',imagen:require('../../../../assets/imagenes/Colores/PARTE2/Negro.jpg')},
+                //parte 3
+                {id:8,nombre:'Mostaza',imagen:require('../../../../assets/imagenes/Colores/PARTE3/Mostaza.jpg')},
+                {id:9,nombre:'Oro',imagen:require('../../../../assets/imagenes/Colores/PARTE3/Oro.jpg')},
+                {id:10,nombre:'Brasil',imagen:require('../../../../assets/imagenes/Colores/PARTE3/Brasil.jpg')},
+                //parte 4 
+                {id:11,nombre:'Chicle',imagen:require('../../../../assets/imagenes/Colores/PARTE4/Chicle.jpg')},
+                {id:12,nombre:'Fucsia',imagen:require('../../../../assets/imagenes/Colores/PARTE4/Fugsia.jpg')},
+                {id:13,nombre:'Rosa',imagen:require('../../../../assets/imagenes/Colores/PARTE4/Rosado.jpg')},
+                {id:14,nombre:'Guinda',imagen:require('../../../../assets/imagenes/Colores/PARTE4/Guinda.jpg')},
+                //parte 5
+                {id:15,nombre:'Melon',imagen:require('../../../../assets/imagenes/Colores/PARTE5/Melon.jpg')},
+                {id:16,nombre:'Agua',imagen:require('../../../../assets/imagenes/Colores/PARTE5/Agua.jpg')},
+        ]
+        return colores
     }
-    //12 unidades listo
-    else if(unidades == 12){
-        return preciorebaja4 * 12
-    }else{
-        return preciorebaja4 * unidades
-    }
+
 }
 
 // module.exports = CalculoPedido
+export default Pedido

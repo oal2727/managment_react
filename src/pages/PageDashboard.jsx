@@ -28,9 +28,9 @@ const PageDashboard = (props) => {
                     </View>
                 </ImageBackground>
                 <View style={{height:height/4,flexDirection:'row'}}>
-                <CircleComponent title={'Total de Hombres'} total={totalhombres}/>
-                   <CircleComponent title={'Total de Clientes'} total={totalclientes}/>
-                   <CircleComponent title={'Total de Mujeres'} total={totalmujeres}/>
+                <CircleComponent title={'Hombres'} total={totalhombres}/>
+                   <CircleComponent title={'Clientes'} total={totalclientes}/>
+                   <CircleComponent title={'Mujeres'} total={totalmujeres}/>
                  
                 </View>
             

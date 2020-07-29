@@ -1,7 +1,9 @@
 import React from 'react'
 import {View,StyleSheet} from 'react-native'
-import {Text,Thumbnail} from 'native-base'
-
+import {Button,Text} from 'native-base'
+import {Thumbnail} from 'native-base'
+import { AntDesign } from '@expo/vector-icons'; 
+import PDFComponent from '../components/Pedido/GeneratePDF/PDF'
 const HeaderPedido = (props) =>{
     const uri = "https://facebook.github.io/react-native/docs/assets/favicon.png";
     
@@ -15,17 +17,11 @@ const HeaderPedido = (props) =>{
     //     })
 
     // }
+    const id = props.id
     return(
         <View>
-            {/* <Button onPress={ () => navigation.goBack()}>
-                <Text style={{flex:1,textAlign:'center'}}>Imprimir Pedidos</Text>
-            </Button> */}
-         {/* <Button onPress={()=>GeneratePDF()} style={{width:200,alignSelf:'center',padding:20,marginTop:10}} iconLeft light>
-               <AntDesign name="printer" size={24} color="white" />  
-                <Text  style={{fontFamily:'Roboto-Light',color:'white'}}>Generar PDF</Text>
-          </Button> */}
+        <PDFComponent id={id} nombre={props.nombre} apellido={props.apellido} direccion={props.direccion}/>
             <View style={estilos.pedidocontainer}>
-                <Thumbnail large source={require('../../assets/imagenes/userimage.png')} />
                 <Text style={estilos.pedidoauthor}>{props.nombre} {props.apellido}</Text>
                 <Text style={estilos.pedidoauthor}>{props.direccion}</Text>
             </View>

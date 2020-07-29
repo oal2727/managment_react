@@ -143,7 +143,7 @@ export const AddCliente= (data) => async(dispatch,getState) =>{
             nombre:data.nombre,
             apellido:data.apellido,
             direccion:data.direccion,
-            sexo:data.sexo
+            sexo:data.sexo,
         }).then(docRef=>{
             const param={
                 id:docRef.id,nombre:data.nombre,apellido:data.apellido,direccion:data.direccion,sexo:data.sexo

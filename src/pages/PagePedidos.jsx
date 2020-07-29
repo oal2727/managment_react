@@ -11,7 +11,7 @@ import {TOGGLE_MODAL,DeleteAllPedidos,QuerySpinner} from '../Redux/PedidoDucks'
 
 //redux
 
-const PagePedido = ({route}) => {
+const PagePedido = ({route,navigation }) => {
    
 
     const dispatch = useDispatch()
@@ -19,6 +19,8 @@ const PagePedido = ({route}) => {
     const nombre = route.params.nombre
     const apellido = route.params.apellido
     const direccion = route.params.direccion
+
+    //route y props no pueden ir juntos en el objeti principal
     const AddPedido = () =>{
         dispatch(TOGGLE_MODAL(true))
     }
@@ -27,6 +29,11 @@ const PagePedido = ({route}) => {
         dispatch(QuerySpinner())
         dispatch(DeleteAllPedidos(id))
     }
+    const Consultas =() =>{
+        // props.navigation.navigate('Consultas')
+        // route.push('Consultas')
+        navigation.navigate('Consultas',id)
+    }
     //trabajando con estados desde page pedido requiere que trabaje con variable de redux
     // const spinnerquery = useSelector(state => state.pedido.spinnerqueryfinal)
     // console.log(spinnerquery)
@@ -34,14 +41,19 @@ const PagePedido = ({route}) => {
         <Container>
         
             <Container>
-            <HeaderPedido nombre={nombre} apellido={apellido} direccion={direccion}/>
+            <HeaderPedido nombre={nombre} apellido={apellido} direccion={direccion} id={id}/>
                     <View style={{flexDirection:'row',justifyContent:'space-around'}}>
-                         <Button onPress={() => AddPedido()} success style={{width:150,borderRadius:20,marginLeft:10}}>
+                         <Button onPress={() => AddPedido()} success style={{width:110,borderRadius:20,marginLeft:10}}>
                             <Text style={{flex:1,textAlign:'center'}}>Añadir Pedido</Text>
                         </Button>
-                        <Button onPress={() => EliminarAllPedidos()} danger style={{width:150,borderRadius:20,marginLeft:10}}>
+                        <Button onPress={() => EliminarAllPedidos()} danger style={{width:110,borderRadius:20,marginLeft:10}}>
                             <Text style={{flex:1,textAlign:'center'}}>Eliminar Pedidos</Text>
                         </Button>
+
+                        <Button primary onPress={()=>Consultas()} style={{width:110,borderRadius:20,marginLeft:10,marginRight:10}}>
+                            <Text style={{flex:1,textAlign:'center'}}>Consultas</Text>
+                        </Button>
+
                     </View>
                 <Container style={{marginTop:10}}>
                         <ListaPedidos dataid={id}/>

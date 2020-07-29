@@ -81,13 +81,13 @@ export default PageList;
 const styles=StyleSheet.create({
     titletalla:{
         textAlign:'center',
-        fontSize:25,
+        fontSize:18,
         color:'orange',
         letterSpacing:1.5
     },
     title:{
         fontFamily:'Roboto-Light',
-        width:68,
+        width:75,
         textAlign:'center',
     }
 })

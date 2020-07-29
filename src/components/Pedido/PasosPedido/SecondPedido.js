@@ -4,74 +4,77 @@ import {
   } from "react-native";
 
   import {GlobalStyles} from '../../../global/estilos'
-  import {Item,Text,Picker,Label,Icon} from 'native-base'
+  import {Item,Text,Picker,Label,Icon,Button} from 'native-base'
+  import ShowImagen from '../LayoutPedido/ShowImage'
+  import BoxInput from '../../../layout/BoxInput'
+import ModalColor from '../ModalPedido/ModalColor'
+import Pedido from '../ConfigPedido/LogicPedido'
+
+
 const SecondManagment = (props) =>{
 
-    const talla=props.talla
-    const setTalla =props.setTalla
+    
     const sexo=props.sexo
     const setSexo = props.setSexo
 
-    const prop=props.prop
-    const tallas=[
-      {id:'1',nombre:'Seleccione'},
-      {id:'2',nombre:'Talla 2'},
-      {id:'3',nombre:'Talla 4'},
-      {id:'4',nombre:'Talla 6'},
-      {id:'5',nombre:'Talla 8'},
-      {id:'6',nombre:'Talla 10'},
-      {id:'7',nombre:'Talla 12'},
-      {id:'8',nombre:'Talla 14'},
-      {id:'9',nombre:'Talla 16'},
-      {id:'10',nombre:'Talla S'},
-      {id:'11',nombre:'Talla M'},
-      {id:'12',nombre:'Talla L'},
-      {id:'13',nombre:'Talla XL'},
-    ]
-    const sexos=[
-      {id:'1',nombre:'Seleccione'},
-      {id:'2',nombre:'Hombre'},
-      {id:'3',nombre:'Mujer'}
-    ]
-    const onValueChangeTalla = (value)=>{
-      setTalla(value)
-   }
+    const setImage = props.setImage
+    const image = props.image
+
+    const color = props.color
+  const setColor=props.setColor
+  const [modalColor,setModalColor] = React.useState(false)
+
+  //object pedido
+  const pedido = new Pedido()
+  const sexos=pedido.getSexo()
+  const colores = pedido.getColores()
+  //---
+  const prop=props.prop
+    
    const onValueChangeSexo = (value) =>{
     setSexo(value)
   }
+  const onValueChangeColor =(value)=>{
+    setColor(value)
+}
 
     return(
         <View style={{marginRight:10,marginLeft:10}}>
-                <Item style={{marginTop:20}}>
-            <Label>Talla:</Label>
-            <Picker as="select"
-              mode="dropdown"
-              iosHeader="Select your SIM"
-              iosIcon={<Icon name="arrow-down" />}
-              onValueChange={(itemvalue)=>{
-                prop.setFieldValue('talla',itemvalue)
-                onValueChangeTalla(itemvalue)
-            }}
-            selectedValue={talla}
-            >
-              {
-                tallas.map((item)=>(
-                  <Picker.Item  key={item.id} label={item.nombre} 
-                  value={item.nombre}/>
-                ))
-              }
-            </Picker>
-            </Item>
-            <Text style={GlobalStyles.messageError}>{prop.touched.talla && prop.errors.talla}</Text>
               
-            <Item style={{marginTop:20}}>
+              <BoxInput title={"Color:"}>
+            <Button iconRight light onPress={()=>setModalColor(true)}>
+              <Text style={{color:'white'}}>Buscar Color</Text>
+              <Icon name="ios-color-palette" />
+            </Button>
+            <View>
+             <Picker
+              mode="dropdown"
+              iosIcon={<Icon name="arrow-down" />}
+              style={{ width: undefined}}
+              selectedValue={prop.values.color}
+              value={prop.values.color}
+              onValueChange={(itemvalue)=>{
+                prop.setFieldValue('color',itemvalue)
+                onValueChangeColor(itemvalue)
+            }}
+            >
+         {
+           colores.map((item)=> (
+             <Picker.Item key={item.id} label={item.nombre} value={item.nombre}/>
+           ))
+         }
+              </Picker>
+            </View>
+          </BoxInput>
+              
+            <Item style={{marginTop:20,marginRight:20,marginLeft:20}}>
             <Label>Sexo:</Label>
             <Picker
               mode="dropdown"
               iosHeader="Select your sexo"
               iosIcon={<Icon name="arrow-down" />}
               style={{ width: undefined}}
-              selectedValue={sexo}
+              selectedValue={prop.values.sexo}
               value={prop.values.sexo}
               onValueChange={(itemvalue)=>{
                 prop.setFieldValue('sexo',itemvalue)
@@ -87,7 +90,9 @@ const SecondManagment = (props) =>{
             </Item>
             <Text style={GlobalStyles.messageError}>{prop.touched.sexo && prop.errors.sexo}</Text>
 
-
+            
+            <ShowImagen image={image} setImage={setImage}  prop={prop}/>
+            <ModalColor setModalColor={setModalColor} color={colores} modalColor={modalColor}/>
        </View>
     )
 }

@@ -5,21 +5,28 @@ import { AntDesign } from '@expo/vector-icons';
 import {useDispatch,connect} from 'react-redux'
 import {GlobalStyles} from '../../global/estilos'
 import {ListarPedidos,EliminarPedido,SumPedido,QuerySpinner} from '../../Redux/PedidoDucks'
+import { FontAwesome } from '@expo/vector-icons'; 
+import moment from 'moment'
+import {TOGGLE_MODAL,EditPedido,setMarca} from '../../Redux/PedidoDucks'
+
 
 
 //unico problema flat list es scrollview
 //estoy creando un componnet scrollview
 const ListaPedidos = (props) => {
     const dispatch = useDispatch()
-    const [pedidos,setPediso] = React.useState([
-        {id:1,color:'verde',marca:'Adidas',nota:'sin rayas azol'},
-        {id:2,color:'azul',marca:'Puma',nota:'rayas azules'},
-    ])
+  
     const Delete = (item) =>{
         dispatch(QuerySpinner())
         dispatch(EliminarPedido(props.dataid,item))
         dispatch(SumPedido(props.dataid))
     }
+    const EditarPedido = (item)=>{
+        dispatch(TOGGLE_MODAL(true))
+        dispatch(EditPedido(item))
+        setMarca(item.marca)
+    }
+
     useEffect(() => {
         dispatch(ListarPedidos(props.dataid))
         dispatch(SumPedido(props.dataid))
@@ -45,7 +52,8 @@ const ListaPedidos = (props) => {
                                     :
                                     <Container>
                                         <Text style={{textAlign:'center',color:'dodgerblue',fontWeight:'bold',fontSize:18}}>
-                                        Total Neto de Pedidos: {props.totalpedido}
+                                        {/* Total de Buzos: {props.totalpedido} */}
+                                        Total de Buzos
                                       </Text>
                                          <FlatList
                                     data={props.pedidos}
@@ -99,8 +107,6 @@ const ListaPedidos = (props) => {
                                           <View style={{flexDirection:'row'}}>
                                                     <Text style={estilos.pedidotitle}>Unidades:</Text>
                                                 <Text style={{...estilos.pedidoresponse}}>{item.unidad}</Text>
-                                                <Text style={{...estilos.pedidotitle,marginLeft:50}}>Total:</Text>
-                                                <Text style={{...estilos.pedidoresponse,color:'red',fontSize:18}}>S/.{item.total}</Text>
                                              </View>
                                               {/* */}
                                               <View>
@@ -119,8 +125,13 @@ const ListaPedidos = (props) => {
                                            
                                           </Body>
                                           </CardItem>
-                                          <CardItem footer bordered>
-                                              <Button style={{padding:5}} onPress={() => Delete(item.id) }>    
+                                          <CardItem footer bordered style={{justifyContent:'space-between'}}>
+                                             <Button warning onPress={ () =>EditarPedido(item)}>
+                                            <FontAwesome  style={{textAlign:'center',marginLeft:5}} name="edit" size={35} color="white" />
+                                                <Text style={{fontFamily:'Roboto-Light',color:'white'}}>Editar</Text>
+                                                    </Button>
+
+                                              <Button danger style={{padding:5}} onPress={() => Delete(item.id) }>    
                                                   <AntDesign name="delete" size={24} color="white" />
                                                   <Text>Eliminar</Text>
                                               </Button>

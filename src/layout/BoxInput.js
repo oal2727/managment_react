@@ -18,10 +18,11 @@ const BoxInput = (props)=>{
                    <View style={styles.BoxBody}>
                     {
                         props.logo === "" ? 
-                        <Text style={{fontSize:19,marginTop:20,color:'red',fontFamily:'Roboto-Light'}}>Marca here...</Text>
+                        <Text style={{fontSize:19,marginTop:20,color:'red',fontFamily:'Roboto-Light'}}>Marca Aqui...</Text>
                         :
                         <Image
                         source={props.logo}
+                        value={props.logo}
                          />
                     }
                    </View>

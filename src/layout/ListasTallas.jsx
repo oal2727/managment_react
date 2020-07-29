@@ -8,12 +8,16 @@ const ListaTallasGlobal = (props) => {
             {
                 props.talla.map((item,index)=>(
                     <View style={estilos.card} key={item.id}>
-                    <View style={estilos.cardtitle}>
-                    <Text style={estilos.title}>{item.talla}</Text>
+
+                   <View style={estilos.cardheader}>
+                   <View>
+                <Text style={{...estilos.title,marginLeft:20}}>Talla : {item.talla}</Text>
                     </View>
-                    <View style={estilos.cardtitle}>
-                 <Text style={estilos.title2}>Unidad: S/{item.unidad}</Text>
+                    <View>
+                 <Text style={{...estilos.title2,marginRight:20}}>Unidad: S/{item.unidad}</Text>
                     </View>
+                       </View>
+
                     <View style={estilos.cardfooter}>
                         <View style={{flexDirection:'row',justifyContent:'space-between',flex:1}}>
                            
@@ -57,29 +61,32 @@ export default ListaTallasGlobal;
 
 const estilos = StyleSheet.create({
     card:{
-        marginTop:5,
+        marginTop:15,
         padding:2,
-        width:300,
+        width:340,
+        marginRight:10,
         backgroundColor:'#5882FA',
         alignItems:'center',
         alignContent:'center',
-        marginLeft:25,
+        marginLeft:10,
         borderWidth:1,
         borderColor:'#FF8000',
         borderRadius:20,
     },
-    cardtitle:{
-        padding:5,
-        borderBottomColor:'white',
-        borderBottomWidth:2,
-        width:'100%',
-    },
     title:{
         fontFamily:'Roboto-Light',
         textAlign:'center',
-        fontSize:23,
+        fontSize:18,
         color:'orange',
         letterSpacing:1.5
+    },
+    cardheader:{
+        flexDirection:'row',
+        alignSelf:'center',
+        justifyContent:'space-between',
+        width:'100%',
+        borderBottomColor:'white',
+        borderBottomWidth:1,
     },
     title2:{
         fontFamily:'Roboto-Light',

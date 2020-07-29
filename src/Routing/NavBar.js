@@ -52,7 +52,7 @@ const NavBarComponent = () => {
           ),
         }}
       />
-      <Tab.Screen
+      {/* <Tab.Screen
         name="Tallas"
         component={PageList}
         options={{
@@ -61,7 +61,11 @@ const NavBarComponent = () => {
             <MaterialIcons name="list" size={24} color={color} />
           ),
         }}
-      />
+      /> */}
+
+
+
+
     <Tab.Screen
         name="Configuracion"
         component={PageConfig}

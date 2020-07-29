@@ -2,10 +2,12 @@ import {createStore,combineReducers,compose,applyMiddleware} from 'redux'
 import thunk from 'redux-thunk'
 import CRUDCliente from './ClienteDucks'
 import CRUDPedido from './PedidoDucks'
+import ConsultasQuery from './ConsultasDucks'
 
 const rootReducer = combineReducers({
     cliente: CRUDCliente,
-    pedido:CRUDPedido
+    pedido:CRUDPedido,
+    consulta:ConsultasQuery
 })
 
 export default function generateStore(){

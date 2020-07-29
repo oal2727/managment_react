@@ -102,26 +102,30 @@ const ModalManagment = (props) =>{
 
     }
     //FIRST MODAL
-    const [logo,setLogo] = React.useState("")
-    const [color,setColor ]= React.useState("")
-
-    //SECOND MODAL
-    const [talla,setTalla] = React.useState("Seleccione")
-    const [sexo,setSexo] = React.useState("Seleccione")
+    const [logo,setLogo] = React.useState("") //logo eleccion de marca
+    const [color,setColor]= React.useState("") // color itembox
+    //SECOND MODAL //talla props.pedido.talla
+    const [talla,setTalla] = React.useState("")
+    const [sexo,setSexo] = React.useState("")
     const [image,setImage] = React.useState(null)
+
  
     const selectComponent = (props) =>{
         if(statePage === 1){
             return (
-                <FirstManagment prop={props} logo={logo} setLogo={setLogo} 
-                color={color} setColor={setColor} image={image} setImage={setImage}/>
+                <FirstManagment prop={props} 
+                logo={logo} 
+                setLogo={setLogo} 
+                talla={talla} setTalla={setTalla} 
+                />
             )
         }
         if(statePage === 2){
             return (
                 <SecondManagment prop={props} 
-                talla={talla} setTalla={setTalla} 
-                sexo={sexo} setSexo={setSexo}/>
+                color={color} setColor={setColor}
+                sexo={sexo} setSexo={setSexo}
+                image={image} setImage={setImage}/>
             )
         }
         if(statePage === 3){
@@ -159,7 +163,12 @@ const ModalManagment = (props) =>{
             </Button>
   
             <View style={{margin:10}}>
-                <Text style={styles.titlePedido}>Agregando Pedidos</Text>
+                {
+                    props.pedido.id === null ? 
+                    <Text style={styles.titlePedido}>Agregando Pedidos</Text>
+                    :
+                    <Text style={styles.titlePedido}>Editando Pedidos</Text>
+                }
             </View>
 
                 <View>
@@ -178,20 +187,29 @@ const ModalManagment = (props) =>{
                     <View>
                         <Formik
                         initialValues={props.pedido}
-                        validationSchema={validationSchema}
+                        // validationSchema={validationSchema}
                         onSubmit={(values)=>{
                              CalculoPedido(values)
                             values.total=totalNeto
                             values.image=image
-                            console.log(values)
+                            // console.log(values)
+                            // if(values.id === null){
+                            //     console.log("add")
+                            //     console.log(values)
+                            // }else{
+                            //     console.log("update")
+                            //     console.log(values)
+                            // }
+
                             dispatch(QuerySpinner())
                             dispatch(AddPedido(props.dataid,values))
-                             dispatch(SumPedido(dataid))
+                            //  dispatch(SumPedido(dataid))
                             dispatch(TOGGLE_MODAL(false))
                             // CleanStates()
                             //problema iniciar por reset form
                             // dispatch(TOGGLE_MODAL(false))
                         }}
+                        //paso el props para poder usar en formik en otros componentes se llama como "prop"
                         >
                       { (props) => (
                               selectComponent(props)

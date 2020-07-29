@@ -13,7 +13,7 @@ export const GlobalStyles = StyleSheet.create({
       },
       addIcon:{
         position:'absolute',
-        top:470,
+        top:400,
         left:300,
         width:50,
         height:50,
