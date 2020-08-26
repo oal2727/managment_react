@@ -10,6 +10,7 @@ const PDFComponent = (props) => {
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(ListarPedidos(props.id))
+        console.log('print',props.pedidos)
         // console.log(props.pedidos.id.substring(0,6))
     },[])
 
@@ -32,7 +33,7 @@ const PDFComponent = (props) => {
                     props.pedidos.map(item => (
                       `<div class="card" key=${item.id}>
                       <div class="card-header">
-                          <img src="${item.image}" class="image_pedido">
+                          <img src="${item.imageUrl}" class="image_pedido">
                       </div>
                           <div class="card-body">
                           <h3>${item.talla} ${item.sexo}</h3>
@@ -49,7 +50,6 @@ const PDFComponent = (props) => {
                             <span>Color: ${item.color}</span>
                              <span>Unidades: ${item.unidad}</span>
                             </div>
-                          <span style="margin-top:10px;">Total : $/.${item.total} </span>
                         </div>
                     </div>`
                     ))
@@ -91,7 +91,7 @@ const PDFComponent = (props) => {
               .card{
                 margin-top:15px;
                 width:300px;
-                height:400px;
+                height:350px;
                 display:flex;
                 flex-direction:column;
                 background-color:#fff;

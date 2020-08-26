@@ -4,10 +4,9 @@ import { Container,Button, Content,Badge, Card, CardItem, Text, Body,Spinner } f
 import { AntDesign } from '@expo/vector-icons'; 
 import {useDispatch,connect} from 'react-redux'
 import {GlobalStyles} from '../../global/estilos'
-import {ListarPedidos,EliminarPedido,SumPedido,QuerySpinner} from '../../Redux/PedidoDucks'
+import {ListarPedidos,EliminarPedido,QuerySpinner} from '../../Redux/PedidoDucks'
 import { FontAwesome } from '@expo/vector-icons'; 
-import moment from 'moment'
-import {TOGGLE_MODAL,EditPedido,setMarca} from '../../Redux/PedidoDucks'
+import {TOGGLE_MODAL,EditPedido,TOOGLE_FILE,TOOGLE_FILENAME,TOOGLE_IMAGEOLD} from '../../Redux/PedidoDucks'
 
 
 
@@ -15,21 +14,29 @@ import {TOGGLE_MODAL,EditPedido,setMarca} from '../../Redux/PedidoDucks'
 //estoy creando un componnet scrollview
 const ListaPedidos = (props) => {
     const dispatch = useDispatch()
-  
+  const {setImage} = props
+
     const Delete = (item) =>{
         dispatch(QuerySpinner())
         dispatch(EliminarPedido(props.dataid,item))
-        dispatch(SumPedido(props.dataid))
+        // dispatch(SumPedido(props.dataid))
     }
     const EditarPedido = (item)=>{
+
         dispatch(TOGGLE_MODAL(true))
+        //IMAGES
+        dispatch(TOOGLE_FILE(item.imageUrl))
+        dispatch(TOOGLE_FILENAME(item.image))
+        dispatch(TOOGLE_IMAGEOLD(item.image))
         dispatch(EditPedido(item))
-        setMarca(item.marca)
+        setImage(item.imageUrl)
+        console.log("editando dato",item)
     }
 
     useEffect(() => {
         dispatch(ListarPedidos(props.dataid))
-        dispatch(SumPedido(props.dataid))
+        // dispatch(SumPedido(props.dataid))
+        // console.log(props.pedidos)
      }, [])
      //arreglar solo en imagenes
     return (  
@@ -53,7 +60,7 @@ const ListaPedidos = (props) => {
                                     <Container>
                                         <Text style={{textAlign:'center',color:'dodgerblue',fontWeight:'bold',fontSize:18}}>
                                         {/* Total de Buzos: {props.totalpedido} */}
-                                        Total de Buzos
+                                        Total de Pedidos {props.cantidadpedido}
                                       </Text>
                                          <FlatList
                                     data={props.pedidos}
@@ -88,17 +95,11 @@ const ListaPedidos = (props) => {
                                                     <Text style={estilos.pedidoresponse}>{item.sexo}</Text>
                                               </View>
                                              </View>
-                                                {  
-                                                item.image === "" ? 
-                                                 <Text style={{margin:30,color:'red',fontSize:19}}>No integro imagen</Text>
-                                                 :
-                                                //  <Text>Hay </Text>
+                                              
                                                  <Image
                                                  style={{width:120,height:130,marginLeft:20,borderColor:'green',borderWidth:3,borderRadius:15}}
-                                                 source={item.image && {uri:item.image}}
+                                                 source={{uri:item.imageUrl}}
                                                  />     
-                                                 }
-                                               
                                          </View>
                                           </CardItem>
                                           <CardItem bordered>
@@ -157,7 +158,8 @@ const mapPropsToState = (state) =>{
         loading:state.pedido.loading,
         spinnerquery:state.pedido.spinnerquery,
         totalpedido:state.pedido.totalpedido,
-        spinnerqueryfinal:state.pedido.spinnerqueryfinal
+        spinnerqueryfinal:state.pedido.spinnerqueryfinal,
+        cantidadpedido:state.pedido.cantidadpedido
     }
 }
  

@@ -13,10 +13,6 @@ import moment from 'moment'
 const FechaQuery = (props) => {
     let dispatch = useDispatch()
     //first date picker
-    useEffect(() => {
-        console.log('id',props.id)
-    }, [props.id])
-
     const [date, setDate] = useState(new Date(1598051730000));
   const [mode, setMode] = useState('date');
   const [show, setShow] = useState(false);
@@ -26,6 +22,7 @@ const [date2, setDate2] = useState(new Date(1598051730000));
 const [mode2, setMode2] = useState('date');
 const [show2, setShow2] = useState(false);
 //----------------
+  const {_id} = props
 
   const onChange = (event, selectedDate) => {
     const currentDate = selectedDate || date;
@@ -41,7 +38,6 @@ const [show2, setShow2] = useState(false);
   const showDatepicker = () => {
     showMode('date');
   };
-    //fuction second datepciker
     const onChange2 = (event, selectedDate) => {
         const currentDate2 = selectedDate || date;
         setShow2(Platform.OS === 'ios');
@@ -58,7 +54,8 @@ const [show2, setShow2] = useState(false);
       };
     //function consultas   
     const SearchFecha = ()=>{
-        dispatch(FechaSearch(date,date2))
+      console.log(props.id)
+        dispatch(FechaSearch(_id,date,date2))
         dispatch(SpinnerQueryFinal(true))
         dispatch(ToogleFecha(false))
     }
@@ -82,7 +79,7 @@ const [show2, setShow2] = useState(false);
   <MaterialIcons name="date-range" style={{marginLeft:10}} size={24} color="white" />
             <Text style={estilos.buttonText}>Primera Fecha!</Text>
       </Button>
-      <Text style={estilos.textfecha}>Fecha Inicial : {moment(date).format('MM/DD/YYYY')}</Text>
+      <Text style={estilos.textfecha}>Fecha Inicial : {moment(date).format('DD/MM/YYYY')}</Text>
 
 
     <Text style={{fontSize:20,textAlign:'center',marginTop:10,marginBottom:10}}>Hasta</Text>
@@ -92,7 +89,7 @@ const [show2, setShow2] = useState(false);
       <MaterialIcons name="date-range" style={{marginLeft:10}} size={24} color="white" />
             <Text style={estilos.buttonText}>Segunda Fecha!</Text>
       </Button>
-      <Text style={estilos.textfecha}>Fecha Secundaria: {moment(date2).format('MM/DD/YYYY')}</Text>
+      <Text style={estilos.textfecha}>Fecha Secundaria: {moment(date2).format('DD/MM/YYYY')}</Text>
 
       </View>
         

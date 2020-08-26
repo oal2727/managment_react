@@ -2,6 +2,7 @@
 //cambie firebase  firebase/app por
 import firebase from 'firebase'
 import 'firebase/firestore'
+import 'firebase/storage'
 var firebaseConfig = {
     apiKey: "AIzaSyCiPEiAFF3e9pImoYPW9qjTqGtrg7qpZR4",
     authDomain: "managment-3e95d.firebaseapp.com",

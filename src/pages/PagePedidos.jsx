@@ -21,18 +21,17 @@ const PagePedido = ({route,navigation }) => {
     const direccion = route.params.direccion
 
     //route y props no pueden ir juntos en el objeti principal
+    const [image,setImage] = React.useState(null)
+
     const AddPedido = () =>{
         dispatch(TOGGLE_MODAL(true))
     }
-    const [spiner,setSpinner]=React.useState(true)
     const EliminarAllPedidos = () =>{
         dispatch(QuerySpinner())
         dispatch(DeleteAllPedidos(id))
     }
     const Consultas =() =>{
-        // props.navigation.navigate('Consultas')
-        // route.push('Consultas')
-        navigation.navigate('Consultas',id)
+        navigation.navigate('Consultas',{id:id})
     }
     //trabajando con estados desde page pedido requiere que trabaje con variable de redux
     // const spinnerquery = useSelector(state => state.pedido.spinnerqueryfinal)
@@ -56,8 +55,8 @@ const PagePedido = ({route,navigation }) => {
 
                     </View>
                 <Container style={{marginTop:10}}>
-                        <ListaPedidos dataid={id}/>
-                        <ModalManagment dataid={id}/>
+                        <ListaPedidos dataid={id} image={image} setImage={setImage}/>
+                        <ModalManagment dataid={id} setImage={setImage} image={image}/>
                 </Container>
             </Container>
              <SnackbarComponent2/>

@@ -6,13 +6,10 @@ import {
 import {Icon,Picker,Button,Text,Item,Label} from 'native-base'
 import ModalMarca from '../ModalPedido/ModalMarca'
 import BoxInput from '../../../layout/BoxInput'
-import {useDispatch} from 'react-redux'
 import Pedido from '../ConfigPedido/LogicPedido'
-import {setMarca} from '../../../Redux/PedidoDucks'
 
 const FirstManagment = (props) =>{
   //props => example :values.handlesubmit,etc
-  let dispatch = useDispatch()
   const prop = props.prop
 
   //define object pedido
@@ -25,68 +22,36 @@ const FirstManagment = (props) =>{
   //modals
   const [modalMarca,setModalMarca] = React.useState(false)
   //variables de items
-  const logo=props.logo
-  const setLogo=props.setLogo
-
-  const talla=props.talla
-    const setTalla =props.setTalla
-    
-    //logo es la imagen =>
-
-    useEffect(() => {
-      console.log(logo)
-      console.log('logo is ',logo)
-      // MostrarImagen(logo)
-      // MostrarImagen(logo)
-    }, [])
-
-
-  const MostrarImagen = (marca) => {
-    prop.setFieldValue('marca',marca)
-    // dispatch(setMarca(marca))
-    //add hook set marca
-    // setMarca(marca)
-    setModalMarca(false)
-    switch(marca){
-      case "Nike":
-        setLogo(require('../../../../assets/imagenes/Logos/LogoNike.jpg'))
-        break;
-      case "Adidas":
-        setLogo(require('../../../../assets/imagenes/Logos/LogoAdidas.jpeg'))
-        break;
-      case "Reebook":
-        setLogo(require('../../../../assets/imagenes/Logos/LogoReebok.jpg'))
-        break;
-      case "Fila":
-        setLogo(require('../../../../assets/imagenes/Logos/LogoFila.png'))
-        break;
-      case "Puma":
-        setLogo(require('../../../../assets/imagenes/Logos/LogoPuma.jpeg'))
-        break;
-      case "Jordan":
-        setLogo(require('../../../../assets/imagenes/Logos/LogoJordan.jpeg'))
-        break;
-      default:
-        // setImagen("")
-        setLogo("")
-    }
+  const {marca,setMarca,talla,setTalla} = props
+    const onValueChangeTalla =(value)=>{
+      setTalla(value)
   }
-  //no reconoce imagenes con extension png
-  //solo reconoce jpg minusculas
-
-  const onValueChangeTalla =(value)=>{
-    setTalla(value)
-}
+  const onValueChangeMarca  =(value)=>{
+    setMarca(value)
+  }
  
     return(
-      // style={{marginTop:20,marginRight:10,marginLeft:10}}
         <View>
-          <BoxInput  title={"Marca:"} logo={logo}>
-          <Button  iconRight light onPress={()=>setModalMarca(true)} >
-              <Text style={{color:'white'}}>Buscar Marca</Text>
-              <Icon name="search" />
-            </Button>
-          </BoxInput>
+            <Item style={{marginTop:20,marginRight:20,marginLeft:20}}>
+            <Label>Marca:</Label>
+            <Picker as="select"
+              mode="dropdown"
+              iosIcon={<Icon name="arrow-down" />}
+              selectedValue={prop.values.marca}
+              value={prop.values.marca}
+              onValueChange={(itemvalue)=>{
+                prop.setFieldValue('marca',itemvalue)
+                onValueChangeMarca(itemvalue)
+            }}
+            >
+              {
+                marcas.map((item)=>(
+                  <Picker.Item  key={item.id} label={item.nombre} 
+                  value={item.nombre}/>
+                ))
+              }
+            </Picker>
+            </Item>
           <Text style={GlobalStyles.messageError}>{prop.touched.marca && prop.errors.marca}</Text>
 
 
@@ -113,9 +78,8 @@ const FirstManagment = (props) =>{
             </Item>
             <Text style={GlobalStyles.messageError}>{prop.touched.talla && prop.errors.talla}</Text>
 
-
-      
-          <ModalMarca marcas={marcas} MostrarImagen={MostrarImagen} setModalMarca={setModalMarca} modalMarca={modalMarca}/>
+              {/* Marca Modal  */}
+          {/* <ModalMarca marcas={marcas} MostrarImagen={MostrarImagen} setModalMarca={setModalMarca} modalMarca={modalMarca}/> */}
             
       </View>
     )

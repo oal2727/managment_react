@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React,{useState,useEffect} from 'react'
 import {View,Modal} from 'react-native'
 import {Button,Text,Picker,Content,Form,Icon} from 'native-base'
 import {connect,useDispatch} from 'react-redux'
@@ -6,13 +6,15 @@ import {ToogleMarca,MarcaSearch} from '../../../Redux/ConsultasDucks'
 import {SpinnerQueryFinal} from '../../../Redux/PedidoDucks'
 const MarcaQuery = (props) => {
     let dispatch = useDispatch()
+    const {id} = props
 
+  
     // const [stateMarca,SetStateMarca] = useState("key0");
     const onValueChangeMarca = (value)=>{
       props.setMarca(value)
     }
     const Search =()=>{
-      dispatch(MarcaSearch(props.id,props.marca))
+      dispatch(MarcaSearch(id,props.marca))
       dispatch(SpinnerQueryFinal(true))
       dispatch(ToogleMarca(false))
     }

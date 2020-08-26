@@ -17,8 +17,7 @@ const SecondManagment = (props) =>{
     const sexo=props.sexo
     const setSexo = props.setSexo
 
-    const setImage = props.setImage
-    const image = props.image
+
 
     const color = props.color
   const setColor=props.setColor
@@ -91,7 +90,7 @@ const SecondManagment = (props) =>{
             <Text style={GlobalStyles.messageError}>{prop.touched.sexo && prop.errors.sexo}</Text>
 
             
-            <ShowImagen image={image} setImage={setImage}  prop={prop}/>
+            <ShowImagen />
             <ModalColor setModalColor={setModalColor} color={colores} modalColor={modalColor}/>
        </View>
     )

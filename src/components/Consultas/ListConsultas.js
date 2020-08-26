@@ -1,7 +1,7 @@
 import React,{useEffect} from 'react'
-import {View,StyleSheet,FlatList,TouchableOpacity,Alert } from 'react-native'
+import {View,StyleSheet,FlatList,TouchableOpacity } from 'react-native'
 import CardQuery from '../../layout/CardQuery'
-import {Button,Text,Container} from 'native-base'
+import {Button,Text,Container,Spinner} from 'native-base'
 import { FontAwesome } from '@expo/vector-icons';
 //querys
 import FechaQuery from './ModalConsultas/FechaQuery'
@@ -15,12 +15,12 @@ const ListConsultas = (props) => {
 
     const dispatch = useDispatch()
     const [marca,setMarca] = React.useState("null")
-    const id = props.id //id del cliente
+    const {id} = props //id del cliente
+    const nombre="jose"
     useEffect(() => {
         dispatch(ListarPedidos(id)) //funcion de obtener pedidos con id del cliente
     }, [])
     const RefreshList = ()=>{
-        console.log("refresh")
       dispatch(SpinnerQueryFinal(true))
         dispatch(ListarPedidos(id))
     }
@@ -45,7 +45,10 @@ const ListConsultas = (props) => {
         <View>
         {
             props.spinnerquerymanagment ? 
-            <Text>Loading Data ..</Text>
+           <View style={{alignSelf:'center'}}>
+                 <Spinner />
+                 <Text>Buscando Datos...</Text>
+               </View>
             :
             <View>
                {
@@ -75,12 +78,9 @@ const ListConsultas = (props) => {
         }
 
         </View>
-
-
-        
         {/* here modals queryas */}
-            <FechaQuery id={id}/>
-            <MarcaQuery marca={marca} id={id} setMarca={setMarca}/>
+            <FechaQuery _id={id} nombre={nombre} />
+            <MarcaQuery marca={marca} id={id} setMarca={setMarca} />
         </Container>
       );
 }

@@ -11,112 +11,21 @@ import FirstManagment from './PasosPedido/FirstPedido'
 import SecondManagment from './PasosPedido/SecondPedido'
 import ThreePedido from './PasosPedido/ThreePedido'
 import * as yup from 'yup'
-import {AddPedido,QuerySpinner,SumPedido,TOGGLE_MODAL} from '../../Redux/PedidoDucks'
+import {AddPedido,QuerySpinner,SumPedido,TOGGLE_MODAL,UpdatePedido,TOOGLE_FILE,TOOGLE_FILENAME,TOOGLE_IMAGEOLD} from '../../Redux/PedidoDucks'
 const ModalManagment = (props) =>{
-    const dataid = props.dataid
     const [statePage,setStatePage] = React.useState(1)
-    let totalNeto=0
-    const CalculoPedido = (values) =>{
-        const talla = values.talla
-        const unidades = values.unidad
-        //aislar por precio unidad
-        if(talla == "2" || talla == "4" || talla == "6"){
-            const preciounidad=70
-            const preciorebaja1=55
-            const preciorebaja2=52
-            const preciorebaja3=50
-            const preciorebaja4=45
-            CostoPedido(unidades,preciounidad,preciorebaja1,preciorebaja2,preciorebaja3,preciorebaja4)
-
-        }else if( talla == "8"){
-            const preciounidad=75
-            const preciorebaja1=55
-            const preciorebaja2=52
-            const preciorebaja3=50
-            const preciorebaja4=45
-            CostoPedido(unidades,preciounidad,preciorebaja1,preciorebaja2,preciorebaja3,preciorebaja4)
-        }else if(talla == "10"){
-            const preciounidad=75
-            const preciorebaja1=55
-            const preciorebaja2=52
-            const preciorebaja3=50
-            const preciorebaja4=50
-            CostoPedido(unidades,preciounidad,preciorebaja1,preciorebaja2,preciorebaja3,preciorebaja4)
-        }else if(talla == "12"){
-            const preciounidad=75
-            const preciorebaja1=60
-            const preciorebaja2=57
-            const preciorebaja3=55
-            const preciorebaja4=50
-            CostoPedido(unidades,preciounidad,preciorebaja1,preciorebaja2,preciorebaja3,preciorebaja4)
-        }else if(talla == "14" || talla == "16"){
-            const preciounidad=80
-            const preciorebaja1=60
-            const preciorebaja2=57
-            const preciorebaja3=55
-            const preciorebaja4=50
-            CostoPedido(unidades,preciounidad,preciorebaja1,preciorebaja2,preciorebaja3,preciorebaja4)
-        }else if(talla == "S" || talla == "M" || talla =="L"){
-            const preciounidad=90
-            const preciorebaja1=76
-            const preciorebaja2=74
-            const preciorebaja3=72
-            const preciorebaja4=70
-            CostoPedido(unidades,preciounidad,preciorebaja1,preciorebaja2,preciorebaja3,preciorebaja4)
-        }else{
-            const preciounidad=95
-            const preciorebaja1=81
-            const preciorebaja2=79
-            const preciorebaja3=77
-            const preciorebaja4=75
-            CostoPedido(unidades,preciounidad,preciorebaja1,preciorebaja2,preciorebaja3,preciorebaja4)
-        }
-    }
-//     //probablemnte problema en unidad sola
-   
-  const CostoPedido = (unidades,preciounidad,preciorebaja1,preciorebaja2,preciorebaja3,preciorebaja4) => {
-        if(unidades <= 2){
-        totalNeto=preciounidad * unidades
-        }else if(unidades == 3){
-        totalNeto=preciorebaja1 * 3
-        }
-        // 4 unidades listo
-        else if(unidades <= 4){
-            totalNeto=preciorebaja2 * 4
-        }else if(4 <= unidades && unidades <= 5){
-            totalNeto=preciorebaja2 * unidades
-        }
-        // 6 unidades listo 
-        else if(unidades == 6){
-            totalNeto= preciorebaja3 * 6
-         
-        }else if(6 <= unidades && unidades <= 11){
-            totalNeto= preciorebaja3 * unidades            
-        }
-        //12 unidades listo
-        else if(unidades == 12){
-            totalNeto=preciorebaja4 * 12
-        }else{
-            totalNeto=preciorebaja4 * unidades
-        }
-
-    }
     //FIRST MODAL
-    const [logo,setLogo] = React.useState("") //logo eleccion de marca
     const [color,setColor]= React.useState("") // color itembox
-    //SECOND MODAL //talla props.pedido.talla
+    const [marca,setMarca] = React.useState("")
     const [talla,setTalla] = React.useState("")
     const [sexo,setSexo] = React.useState("")
-    const [image,setImage] = React.useState(null)
-
- 
     const selectComponent = (props) =>{
         if(statePage === 1){
             return (
                 <FirstManagment prop={props} 
-                logo={logo} 
-                setLogo={setLogo} 
-                talla={talla} setTalla={setTalla} 
+                marca={marca} 
+                setMarca={setMarca} 
+                talla={talla} setTalla={setTalla}
                 />
             )
         }
@@ -125,7 +34,7 @@ const ModalManagment = (props) =>{
                 <SecondManagment prop={props} 
                 color={color} setColor={setColor}
                 sexo={sexo} setSexo={setSexo}
-                image={image} setImage={setImage}/>
+                />
             )
         }
         if(statePage === 3){
@@ -142,7 +51,6 @@ const ModalManagment = (props) =>{
     })
     const dispatch = useDispatch()
     const CleanStates = ()=>{
-        setLogo("")
         setColor("")
         setTalla("Seleccione")
         setSexo("Seleccione")
@@ -150,8 +58,11 @@ const ModalManagment = (props) =>{
     const Cancelar= () => {
         dispatch(TOGGLE_MODAL(false))
         CleanStates()
+        dispatch(TOOGLE_FILE(null))
+        dispatch(TOOGLE_FILENAME(null))
+        dispatch(TOOGLE_IMAGEOLD(null))
     }
-
+  
     return(
         <View>
         <Modal
@@ -189,27 +100,34 @@ const ModalManagment = (props) =>{
                         initialValues={props.pedido}
                         // validationSchema={validationSchema}
                         onSubmit={(values)=>{
-                             CalculoPedido(values)
-                            values.total=totalNeto
-                            values.image=image
-                            // console.log(values)
-                            // if(values.id === null){
-                            //     console.log("add")
-                            //     console.log(values)
-                            // }else{
-                            //     console.log("update")
-                            //     console.log(values)
-                            // }
+                            // console.log('data add/update',values)
+                            // const oldimage = values.image
+                            //requiero trabajar con dos varriables => file | filename
+                            // values.image=props.file
+                            values.image=props.filename
+                             //filename
+                             // console.log(values)
+                             //file 
+                             // console.log(props)
+                            if(values.id === null){
+                                //ESTO ES AGREGAR
+                                 // values.image=props.filename:fileName
+                                // values.image=oldimage
+                                // const filename = getFileName(image)
 
+                                // values.image=props.image.filename
+                                 console.log('add',values)
+                                // console.log(oldimage)
+                                 dispatch(AddPedido(props.dataid,values,props.file))
+                            }else{
+                                // console.log(props.image.filenccame)
+                                console.log("update",values)
+                                // oldimage => nombre del archivo a borrar
+                                dispatch(UpdatePedido(values,props.dataid,props.imageold,props.file))
+                            }
                             dispatch(QuerySpinner())
-                            dispatch(AddPedido(props.dataid,values))
-                            //  dispatch(SumPedido(dataid))
                             dispatch(TOGGLE_MODAL(false))
-                            // CleanStates()
-                            //problema iniciar por reset form
-                            // dispatch(TOGGLE_MODAL(false))
                         }}
-                        //paso el props para poder usar en formik en otros componentes se llama como "prop"
                         >
                       { (props) => (
                               selectComponent(props)
@@ -227,7 +145,10 @@ const ModalManagment = (props) =>{
 const mapStateToProps = (state) => {
     return{
         modal:state.pedido.modal,
-        pedido:state.pedido.pedido
+        pedido:state.pedido.pedido,
+        file:state.pedido.file,
+        filename:state.pedido.filename,
+        imageold:state.pedido.imageold
     }
 }
 

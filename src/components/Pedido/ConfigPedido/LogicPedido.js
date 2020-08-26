@@ -20,13 +20,15 @@ class Pedido{
         return tallas
     }
     getMarcas(){
+        //maarcas funcional sin necesidad de la imagen
         const marcas=[
-            {id:1,nombre:'Nike',imagen:require('../../../../assets/imagenes/Logos/LogoNike.jpg')},
-            {id:2,nombre:'Adidas',imagen:require('../../../../assets/imagenes/Logos/LogoAdidas.jpeg')},
-            {id:3,nombre:'Rebook',imagen:require('../../../../assets/imagenes/Logos/LogoReebok.jpg')},
-            {id:4,nombre:'Fila',imagen:require('../../../../assets/imagenes/Logos/LogoFila.png')},
-            {id:5,nombre:'Puma',imagen:require('../../../../assets/imagenes/Logos/LogoPuma.jpeg')},
-            {id:6,nombre:'Jordan',imagen:require('../../../../assets/imagenes/Logos/LogoJordan.jpeg')}
+            {id:'1',nombre:'Seleccione'},
+            {id:2,nombre:'Nike'},
+            {id:3,nombre:'Adidas'},
+            {id:4,nombre:"Reebook"},
+            {id:5,nombre:"Fila"},
+            {id:6,nombre:"Puma"},
+            {id:7,nombre:'Jordan'}
           ]
           return marcas
     }
@@ -39,6 +41,7 @@ class Pedido{
           return sexos
     }
     getColores(){
+        //implementar un concat imagne
         const colores = [
                 {id:1,nombre:'Sky',imagen:require('../../../../assets/imagenes/Colores/PARTE1/Sky.jpg')},
                 {id:2,nombre:'Azulino',imagen:require('../../../../assets/imagenes/Colores/PARTE1/Azulino.jpg')},

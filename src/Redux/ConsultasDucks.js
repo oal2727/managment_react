@@ -36,24 +36,8 @@ export const ToogleFecha = (databoolean) => (dispatch) =>{
         payload:databoolean
     })
 }
-
-// export const ListarPedidos = (userid) => async(dispatch,getState) =>{
-//     const db = firebase.firestore() 
-//     try{
-//        const data = await db.collection(`clientes/${userid}/articulos`).get()
-//         const arrayData = data.docs.map(doc => ({id:doc.id,...doc.data()}))
-//         dispatch({
-//             type:QuerysTypes.MARCAQUERY,
-//             payload:arrayData
-//         })
-  
-//     }catch(err){
-//         console.log(err)
-//     } 
-// }
 export const MarcaSearch = (userid,value)=>async(dispatch,getState) => {
     const db = firebase.firestore()
-    console.log(userid,value)
     try{
         const data =  await db.collection(`clientes/${userid}/articulos`).where('marca','==',value).get()
         const arrayData = data.docs.map(doc => ({id:doc.id,...doc.data()}))
@@ -73,16 +57,12 @@ export const MarcaSearch = (userid,value)=>async(dispatch,getState) => {
         console.log(err)
     }
 }
-export const FechaSearch = (f1,f2)=>async(dispatch,getState) => {
+export const FechaSearch = (_id,f1,f2)=>async(dispatch) => {
     const db = firebase.firestore()
-    const userid = "FbqpOGPp3SIpEjHX36g2"
-    // console.log(userid,value)
-    // console.log('fecha1',f1)
-    // console.log('fecha2',f2)
     try{
         // .where(f2,'<','created_At').get()
         // const data =  await db.collection(`clientes/${userid}/articulos`).where('createdAt','==',f1).get()
-     const data =  await db.collection(`clientes/FbqpOGPp3SIpEjHX36g2/articulos`).where('createdAt','>=',f1).where('createdAt','<=',f2).get()
+     const data =  await db.collection(`clientes/${_id}/articulos`).where('createdAt','>=',f1).where('createdAt','<=',f2).get()
 
         const arrayData = data.docs.map(doc => ({id:doc.id,...doc.data()}))
         let total =0 
@@ -93,7 +73,6 @@ export const FechaSearch = (f1,f2)=>async(dispatch,getState) => {
             data:arrayData,
             cantidad:total
         }
-        console.log(param)
         dispatch({
             type:QuerysTypes.FECHAQUERY,
             payload:param
