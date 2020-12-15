@@ -55,8 +55,10 @@ const ListConsultas = (props) => {
                    props.pedidos.length ? 
                    <View>
                       <View style={{alignSelf:'center',flexDirection:'row'}}>
-                            <Text style={{marginRight:50}}>Total Consulta : <Text style={{color:'red',fontSize:19}}>{props.totalmarcas}</Text> </Text>
-                            <Text style={{marginLeft:25}}>Total Pedidos : <Text style={{color:'red',fontSize:19}}>{props.cantidadpedido}</Text></Text>
+                            <Text style={{marginRight:50}}>Total Consulta :
+                             <Text style={{color:'red',fontSize:19}}>{props.totalmarcas}</Text> </Text>
+                            <Text style={{marginLeft:25}}>Total Pedidos : 
+                            <Text style={{color:'red',fontSize:19}}>{props.cantidadpedido}</Text></Text>
                           </View>
                     <FlatList
                 data={props.pedidos}
