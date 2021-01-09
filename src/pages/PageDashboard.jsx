@@ -22,8 +22,8 @@ const PageDashboard = (props) => {
                 <ImageBackground style={{height:null,width:null,flex:1}}
                 source={require('../../assets/imagenes/backgroundImage.jpg')}>
                     <View style={estilos.container}>
-                        <Text style={{color:'white',fontFamily:'Roboto-Light',fontSize:35}}>Gestion de pedidos</Text>
-                        <Text style={{color:'white',marginTop:50,fontFamily:'Roboto-Light',fontSize:25}}>Welcome Usuario</Text>
+                        <Text style={{color:'white',fontFamily:'Roboto-Light',fontSize:35}}>Valentina Buzos</Text>
+                        <Text style={{color:'white',marginTop:50,fontFamily:'Roboto-Light',fontSize:25}}>Welcome Oscar</Text>
                         <Thumbnail   large source={require('../../assets/user.png')} />
                     </View>
                 </ImageBackground>
