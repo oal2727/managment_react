@@ -7,7 +7,13 @@ desarrollado con redux y react-navigation
 4. Type `expo start` to start the development server
 
 # Config App
-- Set up on src/config/apiKey.js
+1. set up se react-native/Libraries/Core/Timers/JSTimer.js
+```
+const FRAME_DURATION = 1000 / 10000; 
+```
+
+2. Set up on src/config/apiKey.js
+ ```
 //uso de proyecto en firebase "managment"
 //cambie firebase  firebase/app por
 import firebase from 'firebase'
@@ -26,7 +32,7 @@ var firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 firebase.database.ServerValue.TIMESTAMP
 export {firebase}
-
+```
 1. Dashboard App
 ![WhatsApp Image 2021-01-08 at 21 04 04](https://user-images.githubusercontent.com/41652885/104081319-e5dc6700-51fb-11eb-9bae-f70ad8c75ea5.jpeg)
 2. Managment Clients
