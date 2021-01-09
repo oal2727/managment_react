@@ -38,5 +38,6 @@ export {firebase}
 5. Query clothing
 ![WhatsApp Image 2021-01-08 at 21 25 24 (1)](https://user-images.githubusercontent.com/41652885/104081383-2e942000-51fc-11eb-88a9-2ce539e72e49.jpeg)
 6. REPORT FINAL
-![WhatsApp Image 2021-01-08 at 21 25 24 (1)](https://user-images.githubusercontent.com/41652885/104081383-2e942000-51fc-11eb-88a9-2ce539e72e49.jpeg)
+[documento.pdf](https://github.com/oal2727/managment_react/files/5790076/documento.pdf)
+
 
