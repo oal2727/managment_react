@@ -34,9 +34,9 @@ firebase.database.ServerValue.TIMESTAMP
 export {firebase}
 ```
 1. Dashboard App
-![WhatsApp Image 2021-01-08 at 21 04 04](https://user-images.githubusercontent.com/41652885/104081319-e5dc6700-51fb-11eb-9bae-f70ad8c75ea5.jpeg)
+![Dashboard](https://user-images.githubusercontent.com/41652885/105612400-fe1abd00-5d89-11eb-9aa5-ab343e9528fe.jpeg)
 2. Managment Clients
-![WhatsApp Image 2021-01-08 at 21 04 04 (2)](https://user-images.githubusercontent.com/41652885/104081334-f7257380-51fb-11eb-9acf-a50815a9f714.jpeg)
+![AñadirCliente](https://user-images.githubusercontent.com/41652885/105612396-f0fdce00-5d89-11eb-8311-2eaefd4c6b94.jpeg)
 3. Config App
 ![WhatsApp Image 2021-01-08 at 21 04 04 (1)](https://user-images.githubusercontent.com/41652885/104081347-01477200-51fc-11eb-89c7-08e9451b3a5f.jpeg)
 4. clothing management
