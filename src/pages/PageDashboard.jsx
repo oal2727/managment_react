@@ -20,19 +20,18 @@ const PageDashboard = (props) => {
         <View style={{flex:1,backgroundColor:'white',justifyContent:'flex-end'}}>
            {/* <Text style={estilos.text}>Gestion de Pedidos</Text>  */}
                 <ImageBackground style={{height:null,width:null,flex:1}}
-                source={require('../../assets/imagenes/backgroundImage.jpg')}>
+                source={require('../../assets/imagenes/background_light.png')}>
                     <View style={estilos.container}>
-                        <Text style={{color:'white',fontFamily:'Roboto-Light',fontSize:35}}>Valentina Buzos</Text>
-                        <Text style={{color:'white',marginTop:50,fontFamily:'Roboto-Light',fontSize:25}}>Welcome Oscar</Text>
-                        <Thumbnail   large source={require('../../assets/user.png')} />
+                        <Thumbnail style={{width:"70%",height:120}}  source={require('../../assets/imagenes/logo.jpg')} />
                     </View>
-                </ImageBackground>
-                <View style={{height:height/4,flexDirection:'row'}}>
+                    <Text style={{textAlign:"center",marginTop:50,color:"purple",fontWeight:"bold",fontSize:16}}>Registro de Clientes Registrados</Text>
+                    <View style={{height:height/4,flexDirection:'row'}}>
                 <CircleComponent title={'Hombres'} total={totalhombres}/>
                    <CircleComponent title={'Clientes'} total={totalclientes}/>
                    <CircleComponent title={'Mujeres'} total={totalmujeres}/>
-                 
                 </View>
+                </ImageBackground>
+               
             
         </View>
       );
