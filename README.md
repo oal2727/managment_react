@@ -1,5 +1,10 @@
 ## Mobile app for valentina divers
-desarrollado con redux y react-navigation
+
+## Developed with
+- react-native
+- redux
+- native-base
+- firebase 
 
 ## getting started
 1. Download the project
